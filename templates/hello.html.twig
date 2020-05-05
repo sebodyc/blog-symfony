@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ prenom }}{% endblock %}
+
+{% block body%}
+<h1>hello {{ prenom }}</h1>
+
+{% for p in prenoms %}
+<p>prenom{{p}}</p>
+{% endfor %}
+
+{% for key,value in formateur %}
+<p>{{key}}:{{value}}</p>
+{% endfor %}
+<strong> prenom : {{ formateur.nom | upper }}</strong>
+
+
+<h2>listes des eleves ({{ eleves | length }})</h2>
+{% for eleve in eleves %}
+<p>{{ eleve.prenom }} {{ eleve.nom }}</p>
+
+{% endfor %}
+
+<h2>listes des departement ({{ states | length }})</h2>
+{% for state in states %}
+<p> {{ state.town }}</p>
+
+{% endfor %}
+{% endblock %}
