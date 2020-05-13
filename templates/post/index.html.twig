@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur mon blog!
+{% endblock %}
+
+{% block body %}
+
+	<a class="btn btn-primary" href="{{ path('post_create') }}">creer un nouvel article</a>
+
+	<h1>bienvenu sur le blog</h1>
+
+	{% for post in posts %}
+		<h2>{{post.title |upper}}</h2>
+		<small>dans la categorie
+			{{post.category.title}},publié le
+			{{ post.createdAt | date ('d/m/Y h:i')}}</small>
+		<img src="{{post.image}}" alt="{{post.title}}">
+		<a href="{{ path('post_show',{'id':post.id}) }}">Lire la suite</a>
+		<a class="btn-danger" href="{{ path('post_delete',{'id':post.id}) }}">supprimer</a>
+
+		<a class="btn-danger" href="{{ path('post_edit',{'id':post.id}) }}">Modifier</a>
+	{% endfor %}
+
+{% endblock %}

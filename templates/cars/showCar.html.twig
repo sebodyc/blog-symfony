@@ -1,0 +1,21 @@
+{% extends 'cars/newBase.html.twig' %}
+
+{% block title %}Les belles voitures!
+{% endblock %}
+
+{% block body %}
+
+
+	<h1>
+		{{car.brand}}</h1>
+	<h3>
+		{{car.model}}</h3>
+	<img src="{{car.photo}}" alt="{{car.model}}">
+	<p>Description:
+		{{car.description}}</p>
+	<p>
+		immatriculation:
+		{{car.registration}}</p>
+
+	<a href="{{ path('cars' )}}">Retour au debut</a>
+{% endblock %}

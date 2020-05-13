@@ -1,0 +1,24 @@
+{% extends 'cars/newBase.html.twig' %}
+
+{# {% form_theme postForm 'post/bootstrap-form-theme.html.twig' %} #}
+
+{% block title %}modifier 
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>modifier </h1>
+
+
+	{{ form_start(carsForm) }}
+
+	{{form_widget(carsForm)}}
+
+
+	
+
+	{{ form_end(carsForm) }}
+
+
+{% endblock %}

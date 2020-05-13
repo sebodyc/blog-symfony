@@ -1,0 +1,58 @@
+{% extends 'cars/newBase.html.twig' %}
+
+{% block title %}Les belles voitures!
+{% endblock %}
+
+{% block body %}
+
+
+{% for car in cars %}
+	{# <h1>
+																						{{car.brand}}</h1>
+																					<h3>
+																						{{car.model}}</h3>
+																					<img src="{{car.photo}}" alt="{{car.model}}">
+																					<p>Description:
+																						{{car.description}}</p>
+																					<p>
+																						immatriculation:
+																						{{car.registration}}</p>
+																			
+																			
+																					<a class="btn btn-primary" href="{{ path('cars_show',{'id':car.id}) }}">
+																						<font style="vertical-align: inherit;">
+																							<font style="vertical-align: inherit;">
+																								En savoir plus</a>
+																							<a class="btn btn-danger" href="{{ path('cars_edit',{'id':car.id}) }}">
+																								<font style="vertical-align: inherit;">
+																									<font style="vertical-align: inherit;">
+																										Modifier</a>
+																									<a class="btn btn-danger" href="{{ path('cars_delete',{'id':car.id}) }}">
+																										<font style="vertical-align: inherit;">
+																											<font style="vertical-align: inherit;">
+																												Effacer</a> #}
+	<div class="jumbotron">
+		<div class="card-deck mb-5">
+			<h3 class=" card-header">{{car.brand}}</h3>
+			<div class="card-body">
+				<h5 class="card-title">{{car.model}}</h5>
+				<h6 class="card-subtitle text-muted">immat :
+					{{car.registration}}</h6>
+			</div>
+			<img style=" width: 30%; display: block;" src="{{car.photo}}" alt="{{car.model}}">
+			<div class="card-body">
+				<p class="card-text">{{car.description}}</p>
+			</div>
+
+			<div class="card-body">
+				<a href="{{ path('cars_show',{'id':car.id}) }}" class="card-link">En savoir plus</a>
+				<a href="{{ path('cars_edit',{'id':car.id}) }}" class="card-link">Modifier</a>
+
+				<a href="{{ path('cars_delete',{'id':car.id}) }}" class="card-link">Effacer</a>
+			</div>
+			<div class="card-footer text-muted">
+				2 days ago
+			</div>
+		</div>
+	</div>
+</div>{% endfor %}{% endblock %}

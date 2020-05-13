@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{# {% form_theme postForm 'post/bootstrap-form-theme.html.twig' %} #}
+
+{% block title %}creer un article
+{% endblock %}
+
+{% block body %}
+
+	<h1>creer un article</h1>
+
+
+	{{ form_start(postForm) }}
+
+
+	{{ form_row(postForm.title) }}
+	{{ form_row(postForm.content) }}
+	{{ form_row(postForm.image) }}
+
+	<button type="submit">submit</button>
+
+	{{ form_end(postForm) }}
+
+
+{% endblock %}
+
+
+{# {% block textarea_widget %}
+	<textarea cols="100" rows"60" name="{{ full_name }}" id="{{ id }}" {% for key , value in attr %} {{key}}="{{value}}" {% endfor %}></textarea>
+{% endblock %} #}

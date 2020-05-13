@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{# {% form_theme postForm 'post/bootstrap-form-theme.html.twig' %} #}
+
+{% block title %}modifier l'article
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>modif un article</h1>
+
+
+	{{ form_start(postForm) }}
+
+	{{form_widget(postForm)}}
+
+
+	<button type="submit">enregister les modif</button>
+
+	{{ form_end(postForm) }}
+
+
+{% endblock %}

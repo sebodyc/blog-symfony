@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -10,19 +11,45 @@ use PDO;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\VarDumper\Caster\PdoCaster;
 use Twig\Environment;
 
-class HomeController
+class HomeController extends AbstractController
 {
+
+
+
+    /**
+     * @Route("/category/{id}", name="category")
+     */
+    public function category(EntityManagerInterface $em, PostRepository $repository, CategoryRepository $categoryRepository, $id)
+    {
+
+        $category = $categoryRepository->find($id);
+        if (!$category) {
+            // throw new NotFoundHttpException('la categorie  n\'existe pas');
+            throw $this->createNotFoundException('la categorie  n\'existe pas');
+        }
+
+        return $this->render('category.html.twig', ['category' => $category]);
+    }
+
+
+
+
+
+
     /**
      * @Route("/test", name="test")
      */
-    public function test(EntityManagerInterface $em, PostRepository $repository)
+    public function test(EntityManagerInterface $em, PostRepository $repository, CategoryRepository $categoryRepository)
     {
-        $post = $repository->find(1);
+        $post = $repository->find(43);
+
         // supprime un article
-        $em->remove($post);
+        //$em->remove($post);
         // $posts = $repository->findAll();
         // $postsp = $repository->findOneBy([
         //     'title' => 'mon premier article',
@@ -36,24 +63,23 @@ class HomeController
         //pour creer
         // $em->persist($post);
         //pour env les changements creation supression update
-        $em->flush();
+        //$em->flush();
         dd($post);
     }
 
     /**
      * @Route("/", name="home")
      */
-    public function index(Environment $twig): Response
+    public function index(): Response
     {
-        $html = $twig->render('home.html.twig');
-        return new Response($html);
+
+        return $this->render('home.html.twig');
     }
 
     /**
      * @Route("/hello/{name?World}", name="hello")
      */
-
-    public function hello(string $name, Environment $twig): Response
+    public function hello(string $name): Response
     {
         $dsn = "mysql:host=localhost;dbname=monair";
 
@@ -83,7 +109,7 @@ class HomeController
             ['prenom' => 'riri', 'nom' => 'gege'],
         ];
 
-        $html = $twig->render('hello.html.twig', [
+        $html = $this->render('hello.html.twig', [
             'prenom' => $name,
             'prenoms' => $prenoms,
             'formateur' => $formateur,
